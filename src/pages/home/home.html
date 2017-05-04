@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Ionic Blank
+        </ion-title>
+        <ion-buttons end>
+            <button *ngIf="authenticated()" ion-button icon-only (click)="addSong()"><ion-icon name="add"></ion-icon></button>
+            <button *ngIf="!authenticated()" ion-button outline (click)="signInWithEmail()">Sign In</button>
+            <button *ngIf="authenticated()" ion-button outline (click)="signOut()">Sign Out</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    The world is your oyster.
+    <p>
+        If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+    </p>
+
+    <ion-list *ngIf="authenticated()">
+        <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.$key, song.title)">
+            {{song.title}}
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="!authenticated()">
+        <ion-item *ngFor="let song of songs | async">
+            {{song.title}}
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>
